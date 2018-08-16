@@ -1,0 +1,31 @@
+{
+    "config": {
+        "downloadLocation": "c:\\Software"
+     },
+    "software": [
+        {
+        "name": "Awscli",
+        "description" : "Aws cli for Windows",
+        "url": "https://s3.amazonaws.com/aws-cli/AWSCLI64.msi",
+        "arguments" : "/qn",
+        "path": "C:\\Program Files\\Amazon\\AWSCLI",
+        "cookie": null,
+        "downloadOnlyTo" : null,
+        "type" : null,
+        "executeAfter" : null
+    },
+    {
+        "name": "cloudwatch",
+        "description" : "CloudWatchSSMAGent",
+        "url": "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/windows_amd64/AmazonSSMAgentSetup.exe",
+        "arguments" : "/quiet",
+        "path": "C:\\Program Files\\Amazon\\SSM",
+        "cookie": null,
+        "downloadOnlyTo" : null,
+        "type" : null,
+        "executeAfter" : null
+    }
+    ]
+}
+
+

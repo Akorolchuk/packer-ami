@@ -1,0 +1,71 @@
+{
+  "variables": {
+    "base_ami_id": "ami-f3dcbc8b"
+  },
+
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "us-west-2",
+      "vpc_id": "vpc-eaee1292",
+      "subnet_id": "subnet-1ef19b55",
+      "source_ami": "{{user `base_ami_id`}}",
+      "instance_type": "t2.micro",
+      "communicator": "winrm",
+      "winrm_username": "Administrator",
+      "ami_name": "WindowsAMI-{{isotime \"2006-01-02\"}}",
+      "tags": {
+        "OS_Version": "Windows Server",
+        "Name": "Windows Server Packer Image"
+      },
+      "user_data_file": "template/setup_winrm.txt",
+      "ami_block_device_mappings": [ {
+            "device_name": "/dev/sda1",
+            "volume_type": "gp2",
+            "volume_size": 30,
+            "delete_on_termination": true
+        } ],
+        "launch_block_device_mappings": [ {
+            "device_name": "/dev/sda1",
+            "volume_type": "gp2",
+            "volume_size": 30,
+            "delete_on_termination": true
+        } ]
+    }
+  ],
+
+  "provisioners" : [
+    {
+      "type": "file",
+      "source": "template/install_programs.ps1",
+      "destination": "C:\\Users\\Administrator\\install_programs.ps1"
+    },
+    {
+      "type": "file",
+      "source": "template/softwareToInstall.json",
+      "destination": "C:\\Users\\Administrator\\softwareToInstall.json"
+    },
+    {
+      "type": "powershell",
+      "inline": ["Powershell -NonInteractive -File \"C:\\Users\\Administrator\\install_programs.ps1\" -json \"C:\\Users\\Administrator\\softwareToInstall.json\""]
+    },
+    {
+      "type": "windows-shell",
+      "inline": ["tzutil /s \"AUS Eastern Standard Time\""]
+    },
+    {
+      "type": "powershell",
+      "inline":[
+        "Install-WindowsFeature -Name Windows-Server-Backup"
+      ]
+    },
+    {
+      "type": "powershell",
+      "inline": [
+          "C:/ProgramData/Amazon/EC2-Windows/Launch/Scripts/InitializeInstance.ps1 -Schedule",
+          "C:/ProgramData/Amazon/EC2-Windows/Launch/Scripts/SysprepInstance.ps1 -NoShutdown"
+      ]
+    }
+    
+  ]
+}
