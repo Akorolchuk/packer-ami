@@ -51,7 +51,7 @@
     },
     {
       "type": "powershell",
-      "inline" [
+      "inline" : [
         "C:/Program Files/Amazon/cloudwatch/amazon-cloudwatch-agent-ctl.ps1 -a fetch-config -m ec2 -c file:template/config.json"
       ]
 
