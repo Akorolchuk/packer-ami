@@ -24,8 +24,17 @@
         "downloadOnlyTo" : null,
         "type" : null,
         "executeAfter" : null
+    },
+     {
+       "name": "cloudwatchAgent",
+        "description" : "cloudwatchagent",
+        "url" : "https://s3.amazonaws.com/amazoncloudwatch-agent/windows/amd64/latest/AmazonCloudWatchAgent.zip",
+        "arguments" :"/quiet",
+        "path" : "C:\\Program Files\\Amazon\\cloudwatch",
+        "cookie": null,
+        "downloadOnlyTo" : "C:\\Program Files\\Amazon\\cloudwatch",
+        "type" : null,
+        "executeAfter" : null
     }
     ]
 }
-
-
