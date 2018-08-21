@@ -13,10 +13,10 @@
       "instance_type": "t2.micro",
       "communicator": "winrm",
       "winrm_username": "Administrator",
-      "ami_name": "WindowsAMI-{{isotime \"2006-01-02\"}}",
+      "ami_name": "testAMI-{{isotime \"2006-01-02\"}}",
       "tags": {
         "OS_Version": "Windows Server",
-        "Name": "Windows Server Packer Image"
+        "Name": "Seecure Windows Server Image"
       },
       "user_data_file": "template/setup_winrm.txt",
       "ami_block_device_mappings": [ {
@@ -42,30 +42,39 @@
     },
     {
       "type": "file",
+      "source": "template/config.json",
+      "destination": "C:\\Program Files\\Amazon\\cloudwatchconfig\\config.json"
+    },
+
+    {
+      "type": "file",
       "source": "template/softwareToInstall.json",
       "destination": "C:\\Users\\Administrator\\softwareToInstall.json"
     },
+
     {
       "type": "powershell",
       "inline": ["Powershell -NonInteractive -File \"C:\\Users\\Administrator\\install_programs.ps1\" -json \"C:\\Users\\Administrator\\softwareToInstall.json\""]
     },
-    {
-      "type": "powershell",
-      "inline" : [
-        "Powershell -NonInteractive -File \"C:\\Program Files\\Amazon\\cloudwatch\\amazon-cloudwatch-agent-ctl.ps1\" -a fetch-config -m ec2 -c file:template/config.json"
-      ]
-
-    },
+   
     {
       "type": "windows-shell",
       "inline": ["tzutil /s \"AUS Eastern Standard Time\""]
     },
+
     {
       "type": "powershell",
       "inline":[
         "Install-WindowsFeature -Name Windows-Server-Backup"
       ]
     },
+    {
+      "type": "powershell",
+      "inline" :[
+        "C:/Program Files/Amazon/cloudwatch/amazon-cloudwatch-agent-ctl.ps1 -a fetch-config -m ec2 -c file:C:/Program Files/Amazon/cloudwatchconfig/config.json -s"
+      ]
+    },
+
     {
       "type": "powershell",
       "inline": [

@@ -22,8 +22,8 @@ $url2 = "https://s3.amazonaws.com/amazoncloudwatch-agent/windows/amd64/latest/Am
 $file2 = "$env:temp\AmazonCloudWatchAgent.zip"
 
 (New-Object -TypeName System.Net.WebClient).DownloadFile($url2, $file2)
-Expand-Archive $file1 -DestinationPath "C:\Program Files\Amazon\cloudwatch"
-powershell.exe -ExecutionPolicy ByPass -File $file2
+Expand-Archive -Path $file2 -DestinationPath "C:\Program Files\Amazon\cloudwatch" -Force
+
 
 $EC2SettingsFile="C:\\Program Files\\Amazon\\Ec2ConfigService\\Settings\\Config.xml"
 $xml = [xml](get-content $EC2SettingsFile)

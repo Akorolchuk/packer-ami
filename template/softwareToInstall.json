@@ -15,7 +15,7 @@
         "executeAfter" : null
     },
     {
-        "name": "cloudwatch",
+        "name": "SSM_agent",
         "description" : "CloudWatchSSMAGent",
         "url": "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/windows_amd64/AmazonSSMAgentSetup.exe",
         "arguments" : "/quiet",
