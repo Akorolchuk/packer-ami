@@ -56,13 +56,6 @@
       "type": "powershell",
       "inline": ["Powershell -NonInteractive -File \"C:\\Users\\Administrator\\install_programs.ps1\" -json \"C:\\Users\\Administrator\\softwareToInstall.json\""]
     },
-
-    {
-      "type": "powershell",
-      "inline" :[
-        "C:/Program Files/Amazon/AmazonCloudWatchAgent/amazon-cloudwatch-agent-ctl.ps1 -a fetch-config -m ec2 -c file:C:/Program Files/Amazon/cloudwatchconfig/config.json -s"
-      ]
-    },
     {
       "type": "windows-shell",
       "inline": ["tzutil /s \"AUS Eastern Standard Time\""]
