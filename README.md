@@ -1,6 +1,6 @@
 # Provision a Windows AMI using Packer
 
-Following packer image are included following tools:
+Following packer image are included:
 
 OC: Windows 2016
 
@@ -14,4 +14,5 @@ An AWS account with permissions to create EC2 instances and AMIs
 Packer
 
 Usage Instructions:
+
 packer build provision-windows.json
