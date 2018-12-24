@@ -1,14 +1,14 @@
 {
   "variables": {
-    "base_ami_id": "ami-0d0d4f8ea9e3965a6"
+    "base_ami_id": "ami-019e99815e07ceb49"
   },
 
   "builders": [
     {
       "type": "amazon-ebs",
       "region": "us-west-2",
-      "vpc_id": "vpc-7876b000",
-      "subnet_id": "subnet-82c3bec9",
+      "vpc_id": "vpc-45c06b3c",
+      "subnet_id": "subnet-086ab852",
       "source_ami": "{{user `base_ami_id`}}",
       "instance_type": "t2.micro",
       "communicator": "winrm",
